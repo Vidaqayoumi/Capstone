@@ -71,6 +71,7 @@ public class BaseSetup {
 
 	public void quitBrowser() {
 		if (webDriver != null)
+			
 			webDriver.quit();
 	}
 
