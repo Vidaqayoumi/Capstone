@@ -82,7 +82,31 @@ public class HomeSteps extends CommonUtility{
 		slowDown();
 	}
 	
-
+	@And("User click on Create New Account button")
+    public void userClickOnCreateNewAccountButton() {
+        click(factory.signInPage().newAccountButton);
+        logger.info("user clicked on Create New Account button");
+    }
+    @And("User fill the signUp information with below data")
+    public void userFillTheSignUpInformationWithBelowData(DataTable data) {
+        List<Map<String, String>> signUpData = data.asMaps(String.class,String.class);
+        sendText(factory.signInPage().nameInput,signUpData.get(0).get("name"));
+        sendText(factory.signInPage().emailInput,signUpData.get(0).get("email"));
+        sendText(factory.signInPage().passwordInput,signUpData.get(0).get("password"));
+        sendText(factory.signInPage().confirmPasswordInput,signUpData.get(0).get("confirmPassword"));
+        logger.info("user entered required information into sign up form");
+    }
+    @And("User click on SignUp button")
+    public void userClickOnSignUpButton() {
+        click(factory.signInPage().signUpButton);
+        logger.info("user clicked on Sign up Button");
+    }
+    @Then("User should be logged into account page")
+    public void userShouldBeLoggedIntoAccountPage() {
+        Assert.assertTrue(isElementDisplayed(factory.signInPage().profileImage));
+        Assert.assertTrue(isElementDisplayed(factory.homePage().account));
+        logger.info("Account was created");
+    }
 }
 
 
